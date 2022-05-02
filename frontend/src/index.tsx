@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:04:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-01 17:38:14
+ * @LastEditTime: 2022-05-01 23:34:58
  * @FilePath: \react_ts\frontend\src\index.tsx
  * @Description:
  *
@@ -10,16 +10,37 @@
  */
 import "./index.css";
 
+import Amplify from "aws-amplify";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import React from "react";
+import config from "./aws-exports";
 import { createRoot } from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/store";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
+const isLocalhost = !!(window.location.hostname === "localhost");
+const [productionRedirectSignIn, localRedirectSignIn] =
+  config.oauth.redirectSignIn.split(",");
+const [productionRedirectSignOut, localRedirectSignOut] =
+  config.oauth.redirectSignOut.split(",");
+const updatedAwsConfig = {
+  ...config,
+  oauth: {
+    ...config.oauth,
+    redirectSignIn: isLocalhost
+      ? localRedirectSignIn
+      : productionRedirectSignIn,
+    redirectSignOut: isLocalhost
+      ? localRedirectSignOut
+      : productionRedirectSignOut,
+  },
+};
+
+Amplify.configure(updatedAwsConfig);
 
 root.render(
   <React.StrictMode>
