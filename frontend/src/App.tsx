@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:04:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-01 23:35:38
+ * @LastEditTime: 2022-05-02 12:20:22
  * @FilePath: \react_ts\frontend\src\App.tsx
  * @Description:
  *
@@ -14,6 +14,7 @@ import "@aws-amplify/ui-react/styles.css";
 
 import { Route, Routes } from "react-router-dom";
 
+import AuthRouter from "./pages/auth/AuthRouter";
 import HomePage from "./pages/home/HomePage";
 import Layout from "./Layout";
 import React from "react";
@@ -25,10 +26,11 @@ function App(): JSX.Element {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="auth/*" element={<AuthRouter />} />
         <Route path="/reduxCounter" element={<ReduxCounter />} />
       </Routes>
     </Layout>
   );
 }
 
-export default withAuthenticator(App);
+export default App;

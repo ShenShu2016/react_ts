@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 16:11:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-01 20:57:08
+ * @LastEditTime: 2022-05-02 19:14:18
  * @FilePath: \react_ts\frontend\src\Layout.tsx
  * @Description:
  *
@@ -32,16 +32,18 @@ import React, { useState } from "react";
 import { Avatar } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { MainLinks } from "./components/MainLink";
+import { useNavigate } from "react-router-dom";
 
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
 function Layout({ children }: LayoutProps) {
+  const navigate = useNavigate();
+  const theme = useMantineTheme();
   const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
-  const theme = useMantineTheme();
 
   const [burgerOpened, setBurgerOpened] = useState(false);
 
@@ -167,7 +169,9 @@ function Layout({ children }: LayoutProps) {
                     <Space w="sm" />
                     <Apps size={32} />
                     <Space w="sm" />
-                    <Button size="md">Sign in</Button>
+                    <Button size="md" onClick={() => navigate("/auth/signIn")}>
+                      Sign in
+                    </Button>
                   </Box>
                 </MediaQuery>
               </Box>

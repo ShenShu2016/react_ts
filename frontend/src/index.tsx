@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:04:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-01 23:34:58
+ * @LastEditTime: 2022-05-02 17:35:11
  * @FilePath: \react_ts\frontend\src\index.tsx
  * @Description:
  *
@@ -18,7 +18,7 @@ import React from "react";
 import config from "./aws-exports";
 import { createRoot } from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./app/store";
+import { store } from "./redux/store";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);

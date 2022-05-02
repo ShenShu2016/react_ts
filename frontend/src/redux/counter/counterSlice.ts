@@ -1,15 +1,26 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../app/store';
-import { fetchCount } from './counterAPI';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-01 15:04:26
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-02 17:36:35
+ * @FilePath: \react_ts\frontend\src\redux\counter\counterSlice.ts
+ * @Description:
+ *
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
+ */
+import { AppThunk, RootState } from "../store";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { fetchCount } from "./counterAPI";
 
 export interface CounterState {
   value: number;
-  status: 'idle' | 'loading' | 'failed';
+  status: "idle" | "loading" | "failed";
 }
 
 const initialState: CounterState = {
   value: 0,
-  status: 'idle',
+  status: "idle",
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -18,7 +29,7 @@ const initialState: CounterState = {
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
 export const incrementAsync = createAsyncThunk(
-  'counter/fetchCount',
+  "counter/fetchCount",
   async (amount: number) => {
     const response = await fetchCount(amount);
     // The value we return becomes the `fulfilled` action payload
@@ -27,7 +38,7 @@ export const incrementAsync = createAsyncThunk(
 );
 
 export const counterSlice = createSlice({
-  name: 'counter',
+  name: "counter",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -51,14 +62,14 @@ export const counterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(incrementAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = "idle";
         state.value += action.payload;
       })
       .addCase(incrementAsync.rejected, (state) => {
-        state.status = 'failed';
+        state.status = "failed";
       });
   },
 });
