@@ -75,6 +75,11 @@
           ]
         }
       ]
+    },
+    "S3Trigger5124ac43": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true
     }
   },
   "api": {
@@ -96,6 +101,23 @@
           "attributes": [
             "Arn",
             "Name"
+          ]
+        }
+      ]
+    }
+  },
+  "storage": {
+    "s3shushenca": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "S3Trigger5124ac43",
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
           ]
         }
       ]
