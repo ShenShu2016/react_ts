@@ -10,6 +10,18 @@
       "StackName": "amplify-shushenca-dev-221226",
       "StackId": "arn:aws:cloudformation:us-east-2:115136774643:stack/amplify-shushenca-dev-221226/5123b7e0-c9bd-11ec-8776-02a6245c6990",
       "AmplifyAppId": "doiw3jpourygw"
+    },
+    "categories": {
+      "auth": {
+        "shushenca": {
+          "googleClientId": "1067602080073-6ljc07lloc7db8hf8mu9ji7gr1r08u4j.apps.googleusercontent.com"
+        }
+      },
+      "function": {
+        "shushencaPostConfirmation": {
+          "GROUP": "anyone"
+        }
+      }
     }
   }
 }
