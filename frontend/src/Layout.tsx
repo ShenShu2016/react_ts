@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 16:11:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-01 18:25:06
+ * @LastEditTime: 2022-05-01 20:57:08
  * @FilePath: \react_ts\frontend\src\Layout.tsx
  * @Description:
  *
@@ -26,13 +26,10 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
+import { Apps, BrandGithub, Moon, Sun } from "tabler-icons-react";
 import React, { useState } from "react";
 
-import AppsIcon from "@mui/icons-material/Apps";
 import { Avatar } from "@mantine/core";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import { Link } from "react-router-dom";
 import { MainLinks } from "./components/MainLink";
 
@@ -94,7 +91,7 @@ function Layout({ children }: LayoutProps) {
           // }
           footer={
             <Footer height={60} p="md">
-              Application footer
+              https://mantine.dev/core/affix/
             </Footer>
           }
           header={
@@ -157,7 +154,7 @@ function Layout({ children }: LayoutProps) {
                         window.open("https://github.com/ShenShu2016", "_blank")
                       }
                     >
-                      <GitHubIcon fontSize="large" />
+                      <BrandGithub size={32} />
                     </ActionIcon>
                     <Space w="sm" />
                     <ActionIcon
@@ -165,14 +162,10 @@ function Layout({ children }: LayoutProps) {
                       onClick={() => toggleColorScheme()}
                       title="Toggle color scheme"
                     >
-                      {dark ? (
-                        <LightModeIcon fontSize="large" />
-                      ) : (
-                        <DarkModeIcon fontSize="large" />
-                      )}
+                      {dark ? <Sun size={32} /> : <Moon size={32} />}
                     </ActionIcon>
                     <Space w="sm" />
-                    <AppsIcon fontSize="large" />
+                    <Apps size={32} />
                     <Space w="sm" />
                     <Button size="md">Sign in</Button>
                   </Box>
