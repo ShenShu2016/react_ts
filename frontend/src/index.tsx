@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:04:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 17:35:11
+ * @LastEditTime: 2022-05-02 20:38:48
  * @FilePath: \react_ts\frontend\src\index.tsx
  * @Description:
  *
@@ -43,13 +43,11 @@ const updatedAwsConfig = {
 Amplify.configure(updatedAwsConfig);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
