@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 21:06:39
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 21:16:24
- * @FilePath: \react_ts\frontend\src\components\HeaderComponent.tsx
+ * @LastEditTime: 2022-05-02 23:12:05
+ * @FilePath: \react_ts\frontend\src\components\header\HeaderComponent.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -22,11 +22,12 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
-import { Apps, BrandGithub, Moon, Sun } from "tabler-icons-react";
+import { BrandGithub, Moon, Sun } from "tabler-icons-react";
 
 import { Link } from "react-router-dom";
+import MyApps from "./MyApps";
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 
 interface HeaderComponentProps {
@@ -114,7 +115,7 @@ function HeaderComponent({
               {dark ? <Sun size={32} /> : <Moon size={32} />}
             </ActionIcon>
             <Space w="sm" />
-            <Apps size={32} />
+            <MyApps />
             <Space w="sm" />
             {isAuth ? (
               <Avatar color="cyan" radius="xl">

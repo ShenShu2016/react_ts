@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 16:11:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 21:19:38
+ * @LastEditTime: 2022-05-02 22:12:14
  * @FilePath: \react_ts\frontend\src\Layout.tsx
  * @Description:
  *
@@ -18,7 +18,7 @@ import {
 import React, { useState } from "react";
 
 import FooterComponent from "./components/FooterComponent";
-import HeaderComponent from "./components/HeaderComponent";
+import HeaderComponent from "./components/header/HeaderComponent";
 import NavbarComponent from "./components/NavbarComponent";
 
 interface LayoutProps {
