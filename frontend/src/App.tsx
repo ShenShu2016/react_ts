@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:04:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 12:20:22
+ * @LastEditTime: 2022-05-02 20:40:40
  * @FilePath: \react_ts\frontend\src\App.tsx
  * @Description:
  *
@@ -12,16 +12,23 @@
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
 
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import AuthRouter from "./pages/auth/AuthRouter";
 import HomePage from "./pages/home/HomePage";
 import Layout from "./Layout";
-import React from "react";
 import ReduxCounter from "./pages/reduxCounter/ReduxCounter";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { loadUser } from "./redux/auth/authSlice";
+import { useAppDispatch } from "./redux/hooks";
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
   return (
     <Layout>
       <Routes>
