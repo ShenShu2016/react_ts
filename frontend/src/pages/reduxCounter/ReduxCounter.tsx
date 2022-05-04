@@ -2,6 +2,16 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:21:55
  * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-02 17:36:07
+ * @FilePath: \react_ts\frontend\src\pages\reduxCounter\ReduxCounter.tsx
+ * @Description:
+ *
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
+ */
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-01 15:21:55
+ * @LastEditors: Shen Shu
  * @LastEditTime: 2022-05-01 18:53:24
  * @FilePath: \react_ts\frontend\src\pages\reduxCounter\reduxCounter.tsx
  * @Description:
@@ -9,7 +19,7 @@
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
 
-import { Counter } from "../../features/counter/Counter";
+import { Counter } from "../../redux/counter/Counter";
 import React from "react";
 import logo from "./logo.svg";
 

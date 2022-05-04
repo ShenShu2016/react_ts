@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
-
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+/*
+ * @Author: Shen Shu
+ * @Date: 2022-05-01 15:04:26
+ * @LastEditors: Shen Shu
+ * @LastEditTime: 2022-05-02 17:36:08
+ * @FilePath: \react_ts\frontend\src\redux\counter\Counter.tsx
+ * @Description:
+ *
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
+ */
+import React, { useState } from "react";
 import {
   decrement,
   increment,
-  incrementByAmount,
   incrementAsync,
+  incrementByAmount,
   incrementIfOdd,
   selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+} from "./counterSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+
+import styles from "./Counter.module.css";
 
 export function Counter() {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const [incrementAmount, setIncrementAmount] = useState("2");
 
   const incrementValue = Number(incrementAmount) || 0;
 

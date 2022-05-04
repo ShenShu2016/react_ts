@@ -1,0 +1,15 @@
+{
+  "resourceName": "s3shushenca",
+  "policyUUID": "6af35093",
+  "bucketName": "s3shushenca",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger5124ac43"
+}

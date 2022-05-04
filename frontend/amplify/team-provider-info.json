@@ -1,0 +1,76 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-shushenca-dev-221226-authRole",
+      "UnauthRoleArn": "arn:aws:iam::115136774643:role/amplify-shushenca-dev-221226-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::115136774643:role/amplify-shushenca-dev-221226-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-shushenca-dev-221226-deployment",
+      "UnauthRoleName": "amplify-shushenca-dev-221226-unauthRole",
+      "StackName": "amplify-shushenca-dev-221226",
+      "StackId": "arn:aws:cloudformation:us-east-2:115136774643:stack/amplify-shushenca-dev-221226/5123b7e0-c9bd-11ec-8776-02a6245c6990",
+      "AmplifyAppId": "doiw3jpourygw",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-shushenca-dev-221226-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "shushenca": {
+          "googleClientId": "1067602080073-6ljc07lloc7db8hf8mu9ji7gr1r08u4j.apps.googleusercontent.com"
+        },
+        "userPoolGroups": {}
+      },
+      "function": {
+        "shushencaPostConfirmation": {
+          "GROUP": "anyone",
+          "deploymentBucketName": "amplify-shushenca-dev-221226-deployment",
+          "s3Key": "amplify-builds/shushencaPostConfirmation-69653573374d336f3248-build.zip"
+        },
+        "S3Trigger5124ac43": {
+          "deploymentBucketName": "amplify-shushenca-dev-221226-deployment",
+          "s3Key": "amplify-builds/S3Trigger5124ac43-452b775653555a576576-build.zip"
+        },
+        "AdminQueries168c71eb": {
+          "deploymentBucketName": "amplify-shushenca-dev-221226-deployment",
+          "s3Key": "amplify-builds/AdminQueries168c71eb-42385877754236506433-build.zip"
+        }
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-shushenca-prod-231457-authRole",
+      "UnauthRoleArn": "arn:aws:iam::115136774643:role/amplify-shushenca-prod-231457-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::115136774643:role/amplify-shushenca-prod-231457-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-shushenca-prod-231457-deployment",
+      "UnauthRoleName": "amplify-shushenca-prod-231457-unauthRole",
+      "StackName": "amplify-shushenca-prod-231457",
+      "StackId": "arn:aws:cloudformation:us-east-2:115136774643:stack/amplify-shushenca-prod-231457/611c54d0-cb58-11ec-9f56-02c9350a3ab0",
+      "AmplifyAppId": "doiw3jpourygw",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-shushenca-prod-231457-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "userPoolGroups": {},
+        "shushenca": {
+          "googleClientId": "1067602080073-2iogudvms21s2i79oik2q9n80mp9rqf0.apps.googleusercontent.com"
+        }
+      },
+      "function": {
+        "shushencaPostConfirmation": {
+          "GROUP": "anyone",
+          "deploymentBucketName": "amplify-shushenca-prod-231457-deployment",
+          "s3Key": "amplify-builds/shushencaPostConfirmation-69653573374d336f3248-build.zip"
+        },
+        "AdminQueries168c71eb": {
+          "deploymentBucketName": "amplify-shushenca-prod-231457-deployment",
+          "s3Key": "amplify-builds/AdminQueries168c71eb-42385877754236506433-build.zip"
+        },
+        "S3Trigger5124ac43": {
+          "deploymentBucketName": "amplify-shushenca-prod-231457-deployment",
+          "s3Key": "amplify-builds/S3Trigger5124ac43-452b775653555a576576-build.zip"
+        }
+      }
+    }
+  }
+}

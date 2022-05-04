@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "shushenca",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\shush\\Documents\\GitHub\\react_ts\\frontend\\amplify\\backend\\api\\shushenca\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authshushenca"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
+  }
+}
