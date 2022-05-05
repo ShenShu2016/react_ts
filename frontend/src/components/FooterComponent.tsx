@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 21:17:53
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 21:17:54
+ * @LastEditTime: 2022-05-04 22:44:25
  * @FilePath: \react_ts\frontend\src\components\FooterComponent.tsx
  * @Description:
  *
@@ -14,7 +14,7 @@ import React from "react";
 
 function FooterComponent() {
   return (
-    <Footer height={60} p="md">
+    <Footer height={100} p="md">
       https://mantine.dev/core/affix/
     </Footer>
   );

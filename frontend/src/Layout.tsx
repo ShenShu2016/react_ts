@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 16:11:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 22:12:14
+ * @LastEditTime: 2022-05-04 23:18:02
  * @FilePath: \react_ts\frontend\src\Layout.tsx
  * @Description:
  *
@@ -17,9 +17,10 @@ import {
 } from "@mantine/core";
 import React, { useState } from "react";
 
-import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/header/HeaderComponent";
 import NavbarComponent from "./components/NavbarComponent";
+
+//import FooterComponent from "./components/FooterComponent";
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -65,7 +66,7 @@ function Layout({ children }: LayoutProps) {
           //     </Aside>
           //   </MediaQuery>
           // }
-          footer={<FooterComponent />}
+          // footer={<FooterComponent />}
           header={
             <HeaderComponent
               burgerOpened={burgerOpened}
