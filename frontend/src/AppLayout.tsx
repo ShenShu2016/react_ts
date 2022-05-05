@@ -2,8 +2,8 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 16:11:44
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-04 23:18:02
- * @FilePath: \react_ts\frontend\src\Layout.tsx
+ * @LastEditTime: 2022-05-05 19:13:11
+ * @FilePath: \react_ts\frontend\src\AppLayout.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -22,11 +22,11 @@ import NavbarComponent from "./components/NavbarComponent";
 
 //import FooterComponent from "./components/FooterComponent";
 
-interface LayoutProps {
+interface AppLayoutProps {
   children?: React.ReactNode;
 }
 
-function Layout({ children }: LayoutProps) {
+function AppLayout({ children }: AppLayoutProps) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
@@ -81,4 +81,4 @@ function Layout({ children }: LayoutProps) {
   );
 }
 
-export default Layout;
+export default AppLayout;

@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:04:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 20:40:40
+ * @LastEditTime: 2022-05-05 19:12:57
  * @FilePath: \react_ts\frontend\src\App.tsx
  * @Description:
  *
@@ -17,7 +17,7 @@ import { Route, Routes } from "react-router-dom";
 
 import AuthRouter from "./pages/auth/AuthRouter";
 import HomePage from "./pages/home/HomePage";
-import Layout from "./Layout";
+import Layout from "./AppLayout";
 import ReduxCounter from "./pages/reduxCounter/ReduxCounter";
 import { loadUser } from "./redux/auth/authSlice";
 import { useAppDispatch } from "./redux/hooks";
