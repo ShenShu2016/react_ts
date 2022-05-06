@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 19:33:37
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 20:49:44
+ * @LastEditTime: 2022-05-05 22:49:53
  * @FilePath: \react_ts\frontend\src\redux\auth\authSlice.tsx
  * @Description:
  *
@@ -12,14 +12,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import Auth from "@aws-amplify/auth";
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 
 export interface AuthState {
   isAuth: null | boolean;
-  user: object | null;
+  user: any | null;
   loadUserStatus: "idle" | "loading" | "failed" | "succeed";
   loadUserError: null | any;
   signInStatus: "idle" | "loading" | "failed" | "succeed";
   signInError: null | any;
+  googleSignInStatus: "idle" | "loading" | "failed" | "succeed";
+  googleSignInError: null | any;
   signUpStatus: "idle" | "loading" | "failed" | "succeed";
   signUpError: null | any;
   emailConfirmStatus: "idle" | "loading" | "failed" | "succeed";
@@ -45,6 +48,8 @@ const initialState: AuthState = {
   loadUserError: null,
   signInStatus: "idle",
   signInError: null,
+  googleSignInStatus: "idle",
+  googleSignInError: null,
   signUpStatus: "idle",
   signUpError: null,
   emailConfirmStatus: "idle",
@@ -69,26 +74,36 @@ export const loadUser = createAsyncThunk("auth/loadUser", async () => {
 export const signIn = createAsyncThunk(
   "auth/signIn",
   async ({ email, password }: { email: string; password: string }) => {
-    const response = await Auth.signIn(email, password);
-    return response;
+    const username = email;
+    if (username) {
+      const response = await Auth.signIn(username, password);
+      return response;
+    }
   }
 );
+
+export const googleSignIn = createAsyncThunk("auth/googleSignIn", async () => {
+  const response = await Auth.federatedSignIn({
+    provider: CognitoHostedUIIdentityProvider.Google,
+  });
+  return response;
+});
 
 export const signUp = createAsyncThunk(
   "auth/signUp",
   async ({
-    email,
     password,
-    username,
+    email,
+    name,
   }: {
-    email: string;
     password: string;
-    username: string;
+    email: string;
+    name: string;
   }) => {
     const response = await Auth.signUp({
-      username,
+      username: email,
       password,
-      attributes: { email: email },
+      attributes: { name: name },
     });
     return response;
   }
@@ -97,14 +112,17 @@ export const signUp = createAsyncThunk(
 export const emailConfirm = createAsyncThunk(
   "auth/emailConfirm",
   async ({
-    username,
+    email,
     authenticationCode,
   }: {
-    username: string;
+    email?: string;
     authenticationCode: string;
   }) => {
-    const response = await Auth.confirmSignUp(username, authenticationCode);
-    return response;
+    const username = email;
+    if (username) {
+      const response = await Auth.confirmSignUp(username, authenticationCode);
+      return response;
+    }
   }
 );
 
@@ -212,6 +230,21 @@ const authSlice = createSlice({
         state.user = null;
         state.signInError = action.error.message;
       })
+      // Cases for status of signIn (pending, fulfilled, and rejected)
+      .addCase(googleSignIn.pending, (state, action) => {
+        state.googleSignInStatus = "loading";
+      })
+      .addCase(googleSignIn.fulfilled, (state, action) => {
+        state.googleSignInStatus = "succeed";
+        // state.isAuth = true;
+        // state.user = action.payload; //因为第三方登录会直接跳回去刷新页面所以redux也没用，会被重置掉
+      })
+      .addCase(googleSignIn.rejected, (state, action) => {
+        state.googleSignInStatus = "failed";
+        state.isAuth = false;
+        state.user = null;
+        state.googleSignInError = action.error.message;
+      })
 
       // Cases for status of signUp (pending, fulfilled, and rejected)
       .addCase(signUp.pending, (state, action) => {
@@ -219,6 +252,7 @@ const authSlice = createSlice({
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.signUpStatus = "succeed";
+
         //! need to do later
       })
       .addCase(signUp.rejected, (state, action) => {

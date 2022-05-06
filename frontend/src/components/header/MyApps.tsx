@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 22:13:05
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 23:18:47
+ * @LastEditTime: 2022-05-05 22:45:56
  * @FilePath: \react_ts\frontend\src\components\header\MyApps.tsx
  * @Description:
  *
@@ -26,6 +26,7 @@ function MyApps() {
     if (response.meta.requestStatus === "fulfilled") {
       navigate("/", { replace: true });
     }
+    setOpened(false);
   };
   return (
     <Box sx={{ alignItems: "center", height: "100%" }}>
