@@ -23,7 +23,7 @@
         "shushencaPostConfirmation": {
           "GROUP": "anyone",
           "deploymentBucketName": "amplify-shushenca-dev-221226-deployment",
-          "s3Key": "amplify-builds/shushencaPostConfirmation-69653573374d336f3248-build.zip"
+          "s3Key": "amplify-builds/shushencaPostConfirmation-72706c6e6445756f5651-build.zip"
         },
         "S3Trigger5124ac43": {
           "deploymentBucketName": "amplify-shushenca-dev-221226-deployment",

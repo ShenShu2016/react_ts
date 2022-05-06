@@ -213,6 +213,15 @@
                 "arn:aws:cognito-idp:*:115136774643:userpool/*"
               ],
               "Effect": "Allow"
+            },
+            {
+              "Action": [
+                "dynamodb:PutItem"
+              ],
+              "Resource": [
+                "arn:aws:dynamodb:*:*:table/*"
+              ],
+              "Effect": "Allow"
             }
           ]
         },

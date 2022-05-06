@@ -6,7 +6,8 @@ type UserInfo
   @auth(rules: [{ allow: groups, groups: ["admin"] }]) {
   id: ID!
   email: AWSEmail
-  userName: String
+  userName: String # 和这个东西一样：event.request.userAttributes.sub
+  name: String # 额外的name，但是他们的username 还是uuid。和Google连用不错
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
 }
