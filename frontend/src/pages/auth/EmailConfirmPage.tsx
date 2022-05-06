@@ -1,9 +1,9 @@
 /*
  * @Author: Shen Shu
- * @Date: 2022-05-02 16:57:26
+ * @Date: 2022-05-05 21:36:55
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-05 22:46:48
- * @FilePath: \react_ts\frontend\src\pages\auth\SignInPage.tsx
+ * @LastEditTime: 2022-05-05 22:51:10
+ * @FilePath: \react_ts\frontend\src\pages\auth\EmailConfirmPage.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -15,54 +15,58 @@ import {
   Divider,
   Image,
   Paper,
-  PasswordInput,
   TextInput,
   Title,
 } from "@mantine/core";
-import { googleSignIn, signIn } from "../../redux/auth/authSlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 import React from "react";
+import { emailConfirm } from "../../redux/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { useForm } from "@mantine/hooks";
-import { useNavigate } from "react-router-dom";
 
-function SignInPage() {
+export default function EmailConfirmPage() {
   const navigate = useNavigate();
+  const { email } = useParams();
   const dispatch = useAppDispatch();
+  console.log(email);
+
   const form = useForm({
     initialValues: {
-      email: "",
-      password: "",
+      email: email, // for Cognito, Username is email!
+      authenticationCode: "",
     },
 
     validationRules: {
-      email: (value: string) => /^\S+@\S+$/.test(value),
+      authenticationCode: (value: string) =>
+        /^[0-9][0-9][0-9][0-9][0-9][0-9]$/.test(value),
     },
   });
 
-  const handleGoogleSignIn = async () => {
-    dispatch(googleSignIn());
-  };
-
-  const handleSignInSubmit = async (values: {
-    email: string;
-    password: string;
+  const handleEmailConfirmSubmit = async (values: {
+    email?: string;
+    authenticationCode: string;
   }) => {
-    const { email, password } = values;
-    const response = await dispatch(signIn({ email, password }));
+    const { email, authenticationCode } = values;
+    const response = await dispatch(
+      emailConfirm({ email, authenticationCode })
+    );
     if (response.meta.requestStatus === "fulfilled") {
-      navigate(`/`);
+      navigate(`/auth/signIn`);
     } else {
     }
   };
   return (
     <Box sx={{ maxWidth: "500px", width: "100%" }}>
       <Paper p="md" shadow="xl" sx={{ paddingBottom: "0" }}>
-        <form onSubmit={form.onSubmit((values) => handleSignInSubmit(values))}>
+        <form
+          onSubmit={form.onSubmit((values) => handleEmailConfirmSubmit(values))}
+        >
           <Paper p="sm">
             <TextInput
               label="Email"
               required
+              disabled
               placeholder="exampleuser@example.com"
               value={form.values.email}
               error={form.errors.email && "Please specify valid email"}
@@ -71,20 +75,29 @@ function SignInPage() {
               }
             />
           </Paper>
+
           <Paper p="sm">
-            <PasswordInput
-              label="Password"
+            <TextInput
+              label="Authentication Code"
               required
-              value={form.values.password}
+              //placeholder="exampleuser@example.com"
+              value={form.values.authenticationCode}
+              error={
+                form.errors.authenticationCode &&
+                "Please specify valid authentication code"
+              }
               onChange={(event) =>
-                form.setFieldValue("password", event.currentTarget.value)
+                form.setFieldValue(
+                  "authenticationCode",
+                  event.currentTarget.value
+                )
               }
             />
           </Paper>
 
           <Paper p="sm">
             <Button size="lg" sx={{ minWidth: "100%" }} type="submit">
-              Sign in
+              Confirm Sign Up
             </Button>
           </Paper>
         </form>
@@ -103,7 +116,7 @@ function SignInPage() {
               background: "#4285F4",
               color: "white",
             }}
-            onClick={() => handleGoogleSignIn()}
+            //onClick={() => handleGoogleSignIn()}
           >
             <Image src="/assets/images/icons/google-1.svg" alt="google" />
             <Box sx={{ fontSize: "12px", marginLeft: "1rem" }}>
@@ -160,5 +173,3 @@ function SignInPage() {
     </Box>
   );
 }
-
-export default SignInPage;

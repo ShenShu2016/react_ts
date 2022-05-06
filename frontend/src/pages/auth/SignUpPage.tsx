@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 12:13:49
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-04 22:40:28
+ * @LastEditTime: 2022-05-05 22:59:15
  * @FilePath: \react_ts\frontend\src\pages\auth\SignUpPage.tsx
  * @Description:
  *
@@ -24,51 +24,63 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
+import { googleSignIn, signUp } from "../../redux/auth/authSlice";
 
 import React from "react";
+import { useAppDispatch } from "../../redux/hooks";
 import { useForm } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const form = useForm({
     initialValues: {
-      name: "",
-      userName: "",
-      email: "",
+      email: "", // for Cognito, Username is email!
       password: "",
       confirmPassword: "",
+      name: "",
       termsOfService: false,
     },
 
     validationRules: {
       email: (value: string) => /^\S+@\S+$/.test(value),
+      confirmPassword: (value: string, values) => value === values?.password,
     },
   });
+
+  const handleGoogleSignIn = async () => {
+    await dispatch(googleSignIn());
+  };
+
+  const handleSignUpSubmit = async (values: {
+    email: string;
+    password: string;
+    confirmPassword: string;
+    name: string;
+    termsOfService: boolean;
+  }) => {
+    console.log(values);
+    const { password, email, name } = values;
+    const response = await dispatch(signUp({ password, email, name }));
+    console.log(response);
+    if (response.meta.requestStatus === "fulfilled") {
+      navigate(`/auth/emailConfirm/${email}`);
+    } else {
+    }
+  };
   return (
     <Box sx={{ maxWidth: "500px", width: "100%" }}>
       <Paper p="md" shadow="xl">
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
-          <Paper p="sm">
-            <TextInput
-              label="Full Name"
-              required
-              placeholder="First Last"
-              value={form.values.name}
-              onChange={(event) =>
-                form.setFieldValue("name", event.currentTarget.value)
-              }
-            />
-          </Paper>
-
+        <form onSubmit={form.onSubmit((values) => handleSignUpSubmit(values))}>
           <Paper p="sm">
             <TextInput
               label="Username"
               required
               placeholder="exampleuser"
-              value={form.values.userName}
+              value={form.values.name}
               onChange={(event) =>
-                form.setFieldValue("userName", event.currentTarget.value)
+                form.setFieldValue("name", event.currentTarget.value)
               }
             />
           </Paper>
@@ -102,11 +114,13 @@ function SignUpPage() {
               label="Confirm Password"
               required
               value={form.values.confirmPassword}
+              error={form.errors.confirmPassword && "Password not match"}
               onChange={(event) =>
                 form.setFieldValue("confirmPassword", event.currentTarget.value)
               }
             />
           </Paper>
+
           <Paper p="sm" sx={{ display: "flex" }}>
             <Checkbox
               required
@@ -143,6 +157,7 @@ function SignUpPage() {
               background: "#4285F4",
               color: "white",
             }}
+            onClick={() => handleGoogleSignIn()}
           >
             <Image src="/assets/images/icons/google-1.svg" alt="google" />
             <Box sx={{ fontSize: "12px", marginLeft: "1rem" }}>

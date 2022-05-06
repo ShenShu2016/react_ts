@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 12:18:47
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 17:20:51
+ * @LastEditTime: 2022-05-05 21:47:03
  * @FilePath: \react_ts\frontend\src\pages\auth\AuthRouter.tsx
  * @Description:
  *
@@ -12,6 +12,7 @@
 import { Center, MantineProvider } from "@mantine/core";
 import { Route, Routes } from "react-router-dom";
 
+import EmailConfirmPage from "./EmailConfirmPage";
 import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
 
@@ -28,6 +29,7 @@ export default function AuthRouter() {
         <Routes>
           <Route path="/signIn" element={<SignInPage />} />
           <Route path="/signUp" element={<SignUpPage />} />
+          <Route path="/emailConfirm/:email" element={<EmailConfirmPage />} />
 
           {/* <Route exact path="/forgotPassword" element={<ForgetPassword />} />
       <Route exact path="/forgotUsername" />

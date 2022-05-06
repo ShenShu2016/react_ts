@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-02 21:06:39
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 23:12:05
+ * @LastEditTime: 2022-05-05 22:44:24
  * @FilePath: \react_ts\frontend\src\components\header\HeaderComponent.tsx
  * @Description:
  *
@@ -30,6 +30,23 @@ import React from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 
+function stringToColor(string: string) {
+  let hash = 0;
+  let i;
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  /* eslint-enable no-bitwise */
+  return color;
+}
+
 interface HeaderComponentProps {
   burgerOpened: boolean;
   setBurgerOpened: any;
@@ -42,6 +59,7 @@ function HeaderComponent({
   const navigate = useNavigate();
   const theme = useMantineTheme();
   const { isAuth } = useAppSelector((state) => state.auth);
+  const name = useAppSelector((state) => state.auth?.user?.attributes?.name);
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
   return (
@@ -118,8 +136,8 @@ function HeaderComponent({
             <MyApps />
             <Space w="sm" />
             {isAuth ? (
-              <Avatar color="cyan" radius="xl">
-                无名
+              <Avatar color={stringToColor(name)} radius="xl">
+                {name?.slice(0, 1).toUpperCase()}
               </Avatar>
             ) : (
               <Button size="md" onClick={() => navigate("/auth/signIn")}>
