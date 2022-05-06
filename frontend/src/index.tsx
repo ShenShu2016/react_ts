@@ -2,7 +2,7 @@
  * @Author: Shen Shu
  * @Date: 2022-05-01 15:04:26
  * @LastEditors: Shen Shu
- * @LastEditTime: 2022-05-02 20:38:48
+ * @LastEditTime: 2022-05-06 00:03:14
  * @FilePath: \react_ts\frontend\src\index.tsx
  * @Description:
  *
@@ -22,21 +22,31 @@ import { store } from "./redux/store";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
-const isLocalhost = !!(window.location.hostname === "localhost");
-const [productionRedirectSignIn, localRedirectSignIn] =
-  config.oauth.redirectSignIn.split(",");
-const [productionRedirectSignOut, localRedirectSignOut] =
-  config.oauth.redirectSignOut.split(",");
+
+// const isLocalhost = !!(window.location.hostname === "localhost");
+// const [devRedirectSignIn, localRedirectSignIn,productionRedirectSignIn] =
+//   config.oauth.redirectSignIn.split(",");
+// console.log(config.oauth.redirectSignIn.split(","));
+// const [devRedirectSignOut, localRedirectSignOut,productionRedirectSignOut] =
+//   config.oauth.redirectSignOut.split(",");
+// console.log(config.oauth.redirectSignOut.split(","));
+
+function getUri() {
+  if (window.location.hostname === "localhost") {
+    return "http://localhost:3000/";
+  } else if (window.location.hostname === "shushen.ca") {
+    return "https://shushen.ca/";
+  } else if (window.location.hostname === "dev.shushen.ca") {
+    return "https://dev.shushen.ca/";
+  }
+}
+
 const updatedAwsConfig = {
   ...config,
   oauth: {
     ...config.oauth,
-    redirectSignIn: isLocalhost
-      ? localRedirectSignIn
-      : productionRedirectSignIn,
-    redirectSignOut: isLocalhost
-      ? localRedirectSignOut
-      : productionRedirectSignOut,
+    redirectSignIn: getUri(),
+    redirectSignOut: getUri(),
   },
 };
 
